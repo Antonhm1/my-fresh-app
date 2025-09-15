@@ -1,0 +1,120 @@
+KIRKE WEB APP - KRAVSPECIFIKATION
+
+1. OVERORDNET VISION
+   - Multi-tenant web-system til kirker
+   - Fokus på events, kommunikation og informationsdeling
+   - Nemt at duplikere til flere kirker
+
+2. BRUGERROLLER OG ADGANG
+   2.1 Autentificering
+   - Simpelt password-baseret system (ingen brugernavne)
+   - To delte adgangskoder: Sekretær og Bruger
+   - Cookie-baseret session med timeout
+
+   2.2 Sekretær Rettigheder (Administrator)
+   - Oprette/redigere/slette events (direkte publikation)
+   - Administrere bannere (direkte publikation)
+   - Godkende brugerforslag
+   - Redigere statisk indhold på alle sider
+   - Administrere nyhedsbrev og mailliste
+   - Sende mails til mailliste
+   - Uploade referater fra menighedsråd
+
+   2.3 Bruger Rettigheder (Foreslår)
+   - Oprette/redigere events (kræver godkendelse)
+   - Foreslå bannere (kræver godkendelse)
+   - Foreslå ændringer til statisk indhold (kræver godkendelse)
+   - Se ventende godkendelser
+
+3. EVENTS SYSTEM
+   3.1 Event Typer
+   - Special Events: Koncerter, højtider (stort layout med billede)
+   - Faste Gudstjenester: Ugentlige services (kompakt layout)
+
+   3.2 Event Felder
+   - Titel (påkrævet)
+   - Beskrivelse kort og udvidet
+   - Dato og tidspunkt (påkrævet)
+   - Billede (valgfrit)
+   - Kirke/lokation
+   - Event type
+   - Auto-email reminder
+   - Banner-markering
+
+   3.3 Event Layout
+   - Billede til venstre, info til højre
+   - "Læs mere" knap udvider beskrivelse
+   - Sticky scroll: billede forbliver i viewport
+   - Billede animerer fra aflangt til kvadratisk ved udvidelse
+
+4. BANNER SYSTEM
+   4.1 Banner Placering
+   - Featured bannere øverst
+   - Standard bannere i grid under navigation
+
+   4.2 Banner Felter
+   - Overskrift, beskrivelse, billede
+   - Start/slut dato
+   - Gentagelse (ingen/ugentlig/månedlig/årlig)
+   - Link URL, knap-tekst
+   - Featured checkbox
+
+5. CONTENT MANAGEMENT
+   5.1 Redigeringsmode
+   - Edit-ikoner for indloggede brugere
+   - Inline editing for tekstfelter
+   - Add-knapper ved events og bannere
+   - Status indikator for godkendelse
+
+   5.2 Godkendelsesflow
+   - Bruger foreslår → Sekretær notification → Godkend/Afvis → Live
+
+6. NAVIGATION
+   6.1 Burger Menu (Grid Layout)
+   - Kalender, Nyheder, Kirkegård
+   - Menighedsråd, Billeder, Historie
+   - Kontakt, Dåb, Vielse
+   - Konfirmation, Dødsfald
+
+7. NEWSLETTER & COMMUNICATION
+   7.1 Nyhedsbrev
+   - First-visit popup for tilmelding
+   - Double opt-in med bekræftelsesmail
+   - GDPR compliance
+   - Unsubscribe links
+
+   7.2 Mail Features
+   - Manual broadcasts
+   - Automatiske event-reminders
+   - Mail templates med branding
+
+8. MULTI-TENANT ARKITEKTUR
+   8.1 Database Design
+   - tenant_id i alle tabeller
+   - Tenant isolation
+   - Tabeller: tenants, events, banners, content_pages, subscribers
+
+   8.2 Deployment
+   - Shared codebase
+   - Tenant detection via domain/subdomain
+   - Per-tenant konfiguration (tema, logo, farver)
+
+9. TEKNISK STACK
+   Frontend: React 18+, TypeScript, Vite, TailwindCSS, React Query
+   Backend: Node.js, Express, PostgreSQL, AWS S3, AWS SES, JWT
+   Deployment: Docker, CI/CD, Reverse proxy
+
+10. RESPONSIVE DESIGN
+    - Mobile-first tilgang
+    - Adaptivt layout for events og bannere
+    - Touch-friendly interface
+
+11. PERFORMANCE KRAV
+    - Events og bannere load < 2 sekunder
+    - Optimerede billeder
+    - Lazy loading
+
+12. FREMTIDIGE FEATURES
+    - iCal export
+    - Kirke-specifikke animationer/SVG'er
+    - Avanceret mail templates
