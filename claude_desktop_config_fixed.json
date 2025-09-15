@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "puppeteer-ui-tester": {
+      "command": "node",
+      "args": ["/Users/Anton/my-app/mcp-server/simple-puppeteer-server.js"],
+      "cwd": "/Users/Anton/my-app"
+    }
+  }
+}
