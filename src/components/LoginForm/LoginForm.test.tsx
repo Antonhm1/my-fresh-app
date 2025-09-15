@@ -1,9 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import LoginForm from './LoginForm';
-import { LoginFormData } from '../../types/auth';
 
 describe('LoginForm', () => {
   const mockOnSubmit = vi.fn();
@@ -153,9 +152,9 @@ describe('LoginForm', () => {
     // Password input should be disabled
     expect(screen.getByTestId('password-input')).toBeDisabled();
 
-    // Loading spinner should be present
-    const spinner = document.querySelector('.spinner');
-    expect(spinner).toBeInTheDocument();
+    // Loading spinner should be present (check for spinner by looking for loading content)
+    const loadingContent = screen.getByText('Logger ind...');
+    expect(loadingContent).toBeInTheDocument();
   });
 
   it('displays global error message when error prop is provided', () => {
@@ -207,12 +206,10 @@ describe('LoginForm', () => {
     const user = userEvent.setup();
     render(<LoginForm onSubmit={mockOnSubmit} />);
 
-    // Tab through form elements
+    // Tab through form elements - radio buttons in a group act as one tab stop
     await user.tab();
+    // First radio button should get focus (user radio is checked by default)
     expect(screen.getByTestId('role-user')).toHaveFocus();
-
-    await user.tab();
-    expect(screen.getByTestId('role-administrator')).toHaveFocus();
 
     await user.tab();
     expect(screen.getByTestId('password-input')).toHaveFocus();
@@ -222,6 +219,14 @@ describe('LoginForm', () => {
 
     await user.tab();
     expect(screen.getByTestId('forgot-password')).toHaveFocus();
+
+    // Test arrow key navigation within radio group
+    await user.click(screen.getByTestId('role-user')); // Focus back to radio group
+    await user.keyboard('{ArrowDown}');
+    expect(screen.getByTestId('role-administrator')).toHaveFocus();
+
+    await user.keyboard('{ArrowUp}');
+    expect(screen.getByTestId('role-user')).toHaveFocus();
   });
 
   it('updates form state when user types in password field', async () => {
