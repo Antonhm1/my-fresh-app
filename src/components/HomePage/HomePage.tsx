@@ -1,8 +1,13 @@
+import BannerPreview from '../BannerPreview';
+import Banners from '../Banners';
+import Events from '../Events';
+
 const HomePage = () => {
   return (
     <div>
-      <h1>Welcome to Gislev Kirke</h1>
-      <p>A place of worship, community, and faith.</p>
+      <BannerPreview />
+      <Banners />
+      <Events />
     </div>
   );
 };
