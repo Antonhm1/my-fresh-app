@@ -13,7 +13,7 @@ describe('HomePage', () => {
   it('renders church name', () => {
     render(<HomePage userRole="user" onLogout={mockOnLogout} />);
 
-    expect(screen.getByTestId('church-name')).toHaveTextContent('Sankt Nikolaj Kirke');
+    expect(screen.getByTestId('church-name')).toHaveTextContent('Gislev & Ellested Kirker');
   });
 
   it('renders hamburger menu button', () => {
