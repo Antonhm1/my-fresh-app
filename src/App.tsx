@@ -5,6 +5,7 @@ import ServicesPage from './components/ServicesPage';
 import ContactPage from './components/ContactPage';
 import NewsPage from './components/NewsPage';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/news" element={<NewsPage />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
