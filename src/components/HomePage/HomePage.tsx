@@ -80,7 +80,7 @@ const HomePage = ({ userRole, onLogout }: HomePageProps) => {
             </div>
             <div className={styles.eventMeta}>
               <div className={styles.locationInfo}>
-                <span className={styles.locationIcon">📍</span>
+                <span className={styles.locationIcon}>📍</span>
                 <span className={styles.locationText}>Gislev kirke</span>
               </div>
               <div className={styles.timeInfo}>
