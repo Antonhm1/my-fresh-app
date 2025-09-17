@@ -1,0 +1,39 @@
+.events-section {
+  background-color: #f0fff0;
+  padding: 4rem 0;
+}
+
+.events-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.events-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  font-weight: bold;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+@media (max-width: 768px) {
+  .events-section {
+    padding: 3rem 0;
+  }
+
+  .events-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .events-container {
+    padding: 0 1rem;
+  }
+}
