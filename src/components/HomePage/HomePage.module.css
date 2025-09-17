@@ -5,42 +5,29 @@
   position: relative;
 }
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1000;
-}
-
-/* Church Name in Header */
-.churchName {
-  font-family: 'Georgia', serif;
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: #8B2635;
-  margin: 0;
-  letter-spacing: -0.02em;
-}
-
-/* Hamburger Menu Button */
+/* Floating Hamburger Menu Button */
 .hamburger {
-  background: transparent;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 4px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
 .hamburger:hover {
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 .hamburgerLine {
@@ -49,6 +36,21 @@
   background-color: #333;
   border-radius: 1px;
   transition: all 0.3s ease;
+}
+
+/* Church Name in Hero */
+.churchName {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #8B2635;
+  margin: 0;
+  letter-spacing: -0.02em;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 /* Mobile Menu */
@@ -120,7 +122,7 @@
 .heroSection {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  min-height: 80vh;
+  min-height: 100vh;
   gap: 0;
 }
 
@@ -230,21 +232,21 @@
 }
 
 @media (max-width: 768px) {
-  .header {
-    padding: 1rem 1.5rem;
-  }
-
-  .churchName {
-    font-size: 1.5rem;
-  }
-
   .hamburger {
-    padding: 6px;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 10px;
   }
 
   .hamburgerLine {
     width: 20px;
     height: 2px;
+  }
+
+  .churchName {
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
   }
 
   .mobileMenu {
@@ -253,7 +255,7 @@
   }
 
   .heroSection {
-    min-height: 60vh;
+    min-height: 90vh;
   }
 
   .contentCard {
@@ -271,11 +273,15 @@
 }
 
 @media (max-width: 480px) {
-  .header {
-    padding: 1rem;
+  .hamburger {
+    top: 1rem;
+    right: 1rem;
+    padding: 8px;
   }
 
   .churchName {
+    top: 1rem;
+    left: 1rem;
     font-size: 1.3rem;
   }
 
@@ -285,5 +291,9 @@
 
   .eventTitle {
     font-size: 1.4rem;
+  }
+
+  .heroSection {
+    min-height: 80vh;
   }
 }

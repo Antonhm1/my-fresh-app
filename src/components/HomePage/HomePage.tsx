@@ -16,49 +16,48 @@ const HomePage = ({ userRole, onLogout }: HomePageProps) => {
 
   return (
     <div className={styles.container}>
-      {/* Header with church name and hamburger menu */}
-      <header className={styles.header}>
-        <h1 className={styles.churchName} data-testid="church-name">
-          Gislev & Ellested Kirker
-        </h1>
+      {/* Floating hamburger menu */}
+      <button
+        className={styles.hamburger}
+        onClick={toggleMenu}
+        aria-label="Menu"
+        data-testid="hamburger-menu"
+      >
+        <span className={styles.hamburgerLine}></span>
+        <span className={styles.hamburgerLine}></span>
+        <span className={styles.hamburgerLine}></span>
+      </button>
 
-        <button
-          className={styles.hamburger}
-          onClick={toggleMenu}
-          aria-label="Menu"
-          data-testid="hamburger-menu"
-        >
-          <span className={styles.hamburgerLine}></span>
-          <span className={styles.hamburgerLine}></span>
-          <span className={styles.hamburgerLine}></span>
-        </button>
-
-        {/* Mobile menu overlay */}
-        {isMenuOpen && (
-          <nav className={styles.mobileMenu} data-testid="mobile-menu">
-            <ul className={styles.menuList}>
-              <li className={styles.menuItem}>
-                <span className={styles.userRole}>
-                  {userRole === 'user' ? 'Bruger' : 'Administrator'}
-                </span>
-              </li>
-              <li className={styles.menuItem}>
-                <button
-                  onClick={onLogout}
-                  className={styles.logoutButton}
-                  data-testid="logout-button"
-                >
-                  Log ud
-                </button>
-              </li>
-            </ul>
-          </nav>
-        )}
-      </header>
+      {/* Mobile menu overlay */}
+      {isMenuOpen && (
+        <nav className={styles.mobileMenu} data-testid="mobile-menu">
+          <ul className={styles.menuList}>
+            <li className={styles.menuItem}>
+              <span className={styles.userRole}>
+                {userRole === 'user' ? 'Bruger' : 'Administrator'}
+              </span>
+            </li>
+            <li className={styles.menuItem}>
+              <button
+                onClick={onLogout}
+                className={styles.logoutButton}
+                data-testid="logout-button"
+              >
+                Log ud
+              </button>
+            </li>
+          </ul>
+        </nav>
+      )}
 
       {/* Hero section with split layout */}
       <main className={styles.heroSection}>
         <div className={styles.heroImage}>
+          {/* Church name positioned in hero */}
+          <h1 className={styles.churchName} data-testid="church-name">
+            Gislev & Ellested Kirker
+          </h1>
+
           {/* Decorative SVG overlay */}
           <div className={styles.decorativeOverlay}>
             <svg className={styles.decorativeSVG} viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +80,7 @@ const HomePage = ({ userRole, onLogout }: HomePageProps) => {
             </div>
             <div className={styles.eventMeta}>
               <div className={styles.locationInfo}>
-                <span className={styles.locationIcon}>📍</span>
+                <span className={styles.locationIcon">📍</span>
                 <span className={styles.locationText}>Gislev kirke</span>
               </div>
               <div className={styles.timeInfo}>
