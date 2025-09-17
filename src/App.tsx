@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import LoginForm from './components/LoginForm';
-import { LoginFormData, AuthState } from './types/auth';
+import HomePage from './components/HomePage';
+import type { LoginFormData, AuthState } from './types/auth';
 import './App.css';
 
 function App() {
@@ -50,36 +51,10 @@ function App() {
 
   if (authState.isAuthenticated && authState.user) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: '2rem',
-        padding: '2rem',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        textAlign: 'center'
-      }}>
-        <h1>Velkommen!</h1>
-        <p>Du er logget ind som: <strong>{authState.user.role === 'user' ? 'Bruger' : 'Administrator'}</strong></p>
-        <button
-          onClick={handleLogout}
-          style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: 'white',
-            color: '#667eea',
-            border: 'none',
-            borderRadius: '8px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            fontSize: '1rem'
-          }}
-        >
-          Log ud
-        </button>
-      </div>
+      <HomePage
+        userRole={authState.user.role}
+        onLogout={handleLogout}
+      />
     );
   }
 

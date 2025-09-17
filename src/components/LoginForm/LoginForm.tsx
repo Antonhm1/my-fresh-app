@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { LoginFormData, LoginFormProps } from '../../types/auth';
+import type { LoginFormData, LoginFormProps } from '../../types/auth';
 import styles from './LoginForm.module.css';
 
 const LoginForm = ({ onSubmit, loading = false, error = null }: LoginFormProps) => {
