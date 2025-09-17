@@ -6,11 +6,17 @@ interface EventProps {
   time: string;
   description: string;
   location?: string;
+  image?: string;
 }
 
-const Event = ({ title, date, time, description, location }: EventProps) => {
+const Event = ({ title, date, time, description, location, image }: EventProps) => {
   return (
     <div className="event">
+      {image && (
+        <div className="event-image">
+          <img src={image} alt={title} className="event-img" />
+        </div>
+      )}
       <div className="event-date-time">
         <div className="event-date">{date}</div>
         <div className="event-time">{time}</div>

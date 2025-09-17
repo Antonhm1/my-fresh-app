@@ -7,25 +7,25 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <h3>Gislev Kirke</h3>
-            <p>A place of worship, community, and faith in the heart of Gislev.</p>
+            <p>Et sted for tilbedelse, fællesskab og tro i hjertet af Gislev.</p>
           </div>
 
           <div className="footer-section">
-            <h4>Contact</h4>
+            <h4>Kontakt</h4>
             <p>📍 Kirkevej 12, 5471 Gislev</p>
             <p>📞 +45 12 34 56 78</p>
             <p>✉️ info@gislevkirke.dk</p>
           </div>
 
           <div className="footer-section">
-            <h4>Service Times</h4>
-            <p>Sunday Service: 10:00 AM</p>
-            <p>Bible Study: Wednesday 7:00 PM</p>
-            <p>Youth Group: Friday 4:00 PM</p>
+            <h4>Gudstjenestetider</h4>
+            <p>Søndagsgudstjeneste: 10:00</p>
+            <p>Bibelstudium: Onsdag 19:00</p>
+            <p>Ungdomsgruppe: Fredag 16:00</p>
           </div>
 
           <div className="footer-section">
-            <h4>Follow Us</h4>
+            <h4>Følg Os</h4>
             <div className="footer-social">
               <a href="#" className="social-link">Facebook</a>
               <a href="#" className="social-link">Instagram</a>
@@ -35,7 +35,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2024 Gislev Kirke. All rights reserved.</p>
+          <p>&copy; 2024 Gislev Kirke. Alle rettigheder forbeholdes.</p>
         </div>
       </div>
     </footer>

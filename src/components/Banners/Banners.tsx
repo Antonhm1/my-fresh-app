@@ -4,39 +4,39 @@ import './Banners.css';
 const bannersData = [
   {
     id: 1,
-    image: 'https://via.placeholder.com/300x200/90EE90/ffffff?text=Sunday+Service',
-    title: 'Sunday Service',
-    description: 'Join us every Sunday at 10:00 AM for our weekly service of worship, prayer, and community fellowship.'
+    image: '/eventplaceholderimage1.png',
+    title: 'Søndagsgudstjeneste',
+    description: 'Deltag i vores ugentlige gudstjeneste hver søndag kl. 10:00 med tilbedelse, bøn og fællesskab.'
   },
   {
     id: 2,
-    image: 'https://via.placeholder.com/300x200/FFB6C1/ffffff?text=Bible+Study',
-    title: 'Bible Study',
-    description: 'Weekly Bible study sessions every Wednesday evening. Explore the scriptures together in small groups.'
+    image: '/eventplaceholderimage2.png',
+    title: 'Bibelstudium',
+    description: 'Ugentlige bibelstudiegrupper hver onsdag aften. Udforsk Skriften sammen i små grupper.'
   },
   {
     id: 3,
-    image: 'https://via.placeholder.com/300x200/87CEFA/ffffff?text=Youth+Group',
-    title: 'Youth Group',
-    description: 'Activities and fellowship for young people aged 13-18. Games, discussions, and community service.'
+    image: '/eventpladeholderimage3.png',
+    title: 'Ungdomsgruppe',
+    description: 'Aktiviteter og fællesskab for unge mellem 13-18 år. Spil, diskussioner og samfundstjeneste.'
   },
   {
     id: 4,
-    image: 'https://via.placeholder.com/300x200/DDA0DD/ffffff?text=Community+Events',
-    title: 'Community Events',
-    description: 'Regular community gatherings, charity drives, and special celebrations throughout the year.'
+    image: '/eventplaceholderimage1.png',
+    title: 'Fællesbegivenheder',
+    description: 'Regelmæssige fællessammenkomster, velgørenhedsarrangementer og særlige fejringer året rundt.'
   },
   {
     id: 5,
-    image: 'https://via.placeholder.com/300x200/F0E68C/ffffff?text=Prayer+Group',
-    title: 'Prayer Group',
-    description: 'Join our prayer circle every Friday morning for collective prayer and spiritual support.'
+    image: '/eventplaceholderimage2.png',
+    title: 'Bønnegruppe',
+    description: 'Deltag i vores bønnekreds hver fredag morgen for fælles bøn og åndelig støtte.'
   },
   {
     id: 6,
-    image: 'https://via.placeholder.com/300x200/FFA07A/ffffff?text=Music+Ministry',
-    title: 'Music Ministry',
-    description: 'Be part of our choir and music ministry. Rehearsals every Thursday evening.'
+    image: '/eventpladeholderimage3.png',
+    title: 'Musikministerium',
+    description: 'Bliv en del af vores kor og musikministerium. Øvelser hver torsdag aften.'
   }
 ];
 
@@ -44,7 +44,7 @@ const Banners = () => {
   return (
     <section className="banners-section">
       <div className="banners-container">
-        <h2 className="banners-title">Our Church Activities</h2>
+        <h2 className="banners-title">Vores Kirkeaktiviteter</h2>
         <div className="banners-grid">
           {bannersData.map((banner) => (
             <Banner
