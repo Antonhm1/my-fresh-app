@@ -20,7 +20,7 @@ Follow these steps:
 
 - Create a new branch for the issue
 - Solve the issue in small, manageable steps, according to your plan.
-- Commit your changes after each step.
+- Commit your changes after each step locally on the feature branch.
 
 ## ✓ TEST
 
@@ -32,6 +32,7 @@ Follow these steps:
 
 ## ✓ DEPLOY
 
-- Open a PR and request a review.
+- Only when implementation is complete and i have manually accepted that im
+  satisfied with the result: - Push the feature branch to remote - Open a PR and request a review
 
 Remember to use the GitHub CLI ('gh') for all GitHub-related tasks.
