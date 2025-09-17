@@ -1,8 +1,8 @@
 const HomePage = () => {
   return (
     <div>
-      <h1>Welcome to My App</h1>
-      <p>This is a fresh start!</p>
+      <h1>Welcome to Gislev Kirke</h1>
+      <p>A place of worship, community, and faith.</p>
     </div>
   );
 };
