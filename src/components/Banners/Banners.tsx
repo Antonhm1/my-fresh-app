@@ -1,21 +1,14 @@
 import { useBanners } from '../../hooks/useApi';
 import Banner from '../Banner';
+import { BannersLoadingSkeleton } from '../LoadingSkeletons';
+import { API_LIMITS, FALLBACK_IMAGES, EMPTY_STATE_MESSAGES } from '../../constants/api';
 import './Banners.css';
 
 const Banners = () => {
-  const { data: bannersData, loading, error, refetch } = useBanners({ limit: 6 });
+  const { data: bannersData, loading, error, refetch } = useBanners({ limit: API_LIMITS.BANNERS });
 
   if (loading) {
-    return (
-      <section className="banners-section">
-        <div className="banners-container">
-          <h2 className="banners-title">Vores Kirkeaktiviteter</h2>
-          <div className="loading-state">
-            <p>Indlæser aktiviteter...</p>
-          </div>
-        </div>
-      </section>
-    );
+    return <BannersLoadingSkeleton />;
   }
 
   if (error) {
@@ -44,7 +37,7 @@ const Banners = () => {
           {banners.map((banner) => (
             <Banner
               key={`${banner.type}-${banner.id}`}
-              image={banner.image_url || '/eventplaceholderimage1.png'}
+              image={banner.image_url || FALLBACK_IMAGES.EVENT}
               title={banner.title}
               description={banner.description || banner.content || 'Ingen beskrivelse tilgængelig'}
             />
@@ -52,7 +45,10 @@ const Banners = () => {
         </div>
         {banners.length === 0 && (
           <div className="empty-state">
-            <p>Ingen udvalgte aktiviteter at vise i øjeblikket.</p>
+            <p>🎉 {EMPTY_STATE_MESSAGES.BANNERS}</p>
+            <button onClick={refetch} className="refresh-button">
+              Opdater
+            </button>
           </div>
         )}
       </div>

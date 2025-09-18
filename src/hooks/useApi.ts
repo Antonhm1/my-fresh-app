@@ -57,14 +57,14 @@ export function useEvents(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const apiCall = useCallback(async () => {
-    return getEvents({
-      featured: options?.featured,
-      limit: options?.limit,
-    });
-  }, [options?.featured, options?.limit]);
+  // Destructure options to prevent unnecessary re-renders
+  const { featured, limit, immediate = true } = options || {};
 
-  return useApi(apiCall, { immediate: options?.immediate ?? true });
+  const apiCall = useCallback(async () => {
+    return getEvents({ featured, limit });
+  }, [featured, limit]);
+
+  return useApi(apiCall, { immediate });
 }
 
 // Hook specifically for info/news
@@ -74,15 +74,14 @@ export function useInfo(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const apiCall = useCallback(async () => {
-    return getInfo({
-      featured: options?.featured,
-      type: options?.type,
-      limit: options?.limit,
-    });
-  }, [options?.featured, options?.type, options?.limit]);
+  // Destructure options to prevent unnecessary re-renders
+  const { featured, type, limit, immediate = true } = options || {};
 
-  return useApi(apiCall, { immediate: options?.immediate ?? true });
+  const apiCall = useCallback(async () => {
+    return getInfo({ featured, type, limit });
+  }, [featured, type, limit]);
+
+  return useApi(apiCall, { immediate });
 }
 
 // Hook specifically for banners
@@ -90,11 +89,14 @@ export function useBanners(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const apiCall = useCallback(async () => {
-    return getBanners({ limit: options?.limit });
-  }, [options?.limit]);
+  // Destructure options to prevent unnecessary re-renders
+  const { limit, immediate = true } = options || {};
 
-  return useApi(apiCall, { immediate: options?.immediate ?? true });
+  const apiCall = useCallback(async () => {
+    return getBanners({ limit });
+  }, [limit]);
+
+  return useApi(apiCall, { immediate });
 }
 
 // Generic hook for async operations with loading states
