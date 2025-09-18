@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ApiError } from '../utils/api';
+import { ApiError, getEvents, getInfo, getBanners } from '../utils/api';
 
 export interface UseApiState<T> {
   data: T | null;
@@ -56,8 +56,6 @@ export function useEvents(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const { getEvents } = require('../utils/api');
-
   return useApi(
     () => getEvents({
       featured: options?.featured,
@@ -74,8 +72,6 @@ export function useInfo(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const { getInfo } = require('../utils/api');
-
   return useApi(
     () => getInfo({
       featured: options?.featured,
@@ -91,8 +87,6 @@ export function useBanners(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  const { getBanners } = require('../utils/api');
-
   return useApi(
     () => getBanners({ limit: options?.limit }),
     { immediate: options?.immediate ?? true }
@@ -100,7 +94,7 @@ export function useBanners(options?: {
 }
 
 // Generic hook for async operations with loading states
-export function useAsyncAction<T extends any[], R>(
+export function useAsyncAction<T extends unknown[], R>(
   action: (...args: T) => Promise<R>
 ): {
   execute: (...args: T) => Promise<R>;
