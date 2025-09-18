@@ -100,3 +100,12 @@ export const cleanupTestData = async () => {
   await db.query(`DELETE FROM events WHERE title LIKE 'Test%'`);
   await db.query(`DELETE FROM info WHERE title LIKE 'Test%'`);
 };
+
+export const cleanupAllData = async () => {
+  // Delete ALL data (including seed data) for isolated tests
+  await db.query(`DELETE FROM events`);
+  await db.query(`DELETE FROM info`);
+  // Reset sequences
+  await db.query(`ALTER SEQUENCE events_id_seq RESTART WITH 1`);
+  await db.query(`ALTER SEQUENCE info_id_seq RESTART WITH 1`);
+};

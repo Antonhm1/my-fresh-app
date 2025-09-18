@@ -1,81 +1,85 @@
+import { useEvents } from '../../hooks/useApi';
 import Event from '../Event';
 import './Events.css';
 
-const eventsData = [
-  {
-    id: 1,
-    title: 'Søndags Morgengudstjeneste',
-    date: '22. Dec',
-    time: '10:00',
-    description: 'Deltag i vores ugentlige gudstjeneste med salmer, bønner og prædiken af Pastor Nielsen.',
-    location: 'Hovedkirken',
-    image: '/eventplaceholderimage1.png'
-  },
-  {
-    id: 2,
-    title: 'Juleaftens Gudstjeneste',
-    date: '24. Dec',
-    time: '18:00',
-    description: 'Særlig juleaftens fejring med lysgudstjeneste og julesalmer.',
-    location: 'Hovedkirken',
-    image: '/eventplaceholderimage2.png'
-  },
-  {
-    id: 3,
-    title: 'Nytårs Bønnemøde',
-    date: '31. Dec',
-    time: '23:00',
-    description: 'Afslut året med bøn og reflektion, mens vi byder det nye år velkommen sammen.',
-    location: 'Bønnekapellet',
-    image: '/eventpladeholderimage3.png'
-  },
-  {
-    id: 4,
-    title: 'Bibelstudiegruppe',
-    date: '3. Jan',
-    time: '19:00',
-    description: 'Ugentligt bibelstudium med fokus på Johannes Evangeliet. Alle er velkomne til diskussionen.',
-    location: 'Fællesskabsrummet',
-    image: '/eventplaceholderimage1.png'
-  },
-  {
-    id: 5,
-    title: 'Ungdomsmøde',
-    date: '5. Jan',
-    time: '16:00',
-    description: 'Ungdomsaktiviteter, spil og fællesskab for teenagere. Pizza og sjov garanteret!',
-    location: 'Ungdomscenteret',
-    image: '/eventplaceholderimage2.png'
-  },
-  {
-    id: 6,
-    title: 'Samfundstjeneste',
-    date: '7. Jan',
-    time: '09:00',
-    description: 'Frivilligt arbejde med at hjælpe den lokale madbank og tjene vores samfund.',
-    location: 'Mødes ved kirken',
-    image: '/eventpladeholderimage3.png'
-  }
-];
+// Utility function to format date strings
+const formatEventDate = (dateString: string): { date: string; time: string } => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    timeZone: 'Europe/Copenhagen'
+  };
+
+  const formattedDate = date.toLocaleDateString('da-DK', options);
+  const formattedTime = date.toLocaleTimeString('da-DK', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Copenhagen'
+  });
+
+  return { date: formattedDate, time: formattedTime };
+};
 
 const Events = () => {
+  const { data: eventsData, loading, error, refetch } = useEvents({ limit: 6 });
+
+  if (loading) {
+    return (
+      <section className="events-section">
+        <div className="events-container">
+          <h2 className="events-title">Kommende Begivenheder</h2>
+          <div className="loading-state">
+            <p>Indlæser begivenheder...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="events-section">
+        <div className="events-container">
+          <h2 className="events-title">Kommende Begivenheder</h2>
+          <div className="error-state">
+            <p>Der opstod en fejl ved indlæsning af begivenheder: {error}</p>
+            <button onClick={refetch} className="retry-button">
+              Prøv igen
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const events = eventsData?.events || [];
+
   return (
     <section className="events-section">
       <div className="events-container">
         <h2 className="events-title">Kommende Begivenheder</h2>
         <div className="events-list">
-          {eventsData.map((event) => (
-            <Event
-              key={event.id}
-              title={event.title}
-              date={event.date}
-              time={event.time}
-              description={event.description}
-              location={event.location}
-              image={event.image}
-            />
-          ))}
+          {events.map((event) => {
+            const { date, time } = formatEventDate(event.start_date);
+            return (
+              <Event
+                key={event.id}
+                title={event.title}
+                date={date}
+                time={time}
+                description={event.description}
+                location={event.location || 'Sted ikke angivet'}
+                image={event.image_url || '/eventplaceholderimage1.png'}
+              />
+            );
+          })}
         </div>
+        {events.length === 0 && (
+          <div className="empty-state">
+            <p>Ingen kommende begivenheder at vise i øjeblikket.</p>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,15 +1,15 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import request from 'supertest';
 import app from '../src/index.js';
-import { createTestEvent, createTestInfo, cleanupTestData } from './setup.js';
+import { createTestEvent, createTestInfo, cleanupAllData } from './setup.js';
 
 describe('Banners API', () => {
   beforeEach(async () => {
-    await cleanupTestData();
+    await cleanupAllData();
   });
 
   afterEach(async () => {
-    await cleanupTestData();
+    await cleanupAllData();
   });
 
   describe('GET /api/banners', () => {

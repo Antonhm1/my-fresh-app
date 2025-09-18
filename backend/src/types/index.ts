@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface Tenant {
   id: number;
   name: string;
