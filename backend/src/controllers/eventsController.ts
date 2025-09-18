@@ -5,10 +5,10 @@ import { AppError, asyncHandler } from '../middleware/errorHandler.js';
 
 export const getEvents = asyncHandler(async (req: TenantRequest, res: Response<ApiResponse>) => {
   const tenant = req.tenant!;
-  const { featured, limit, offset } = req.query as QueryParams;
+  const { featured, limit, offset } = req.query;
 
   // Convert query params to proper types
-  const featuredBoolean = featured === true || featured === 'true' ? true : featured === 'false' ? false : undefined;
+  const featuredBoolean = featured === 'true' ? true : featured === 'false' ? false : undefined;
   const limitNumber = limit ? parseInt(limit.toString()) : undefined;
   const offsetNumber = offset ? parseInt(offset.toString()) : undefined;
 
@@ -111,7 +111,7 @@ export const createEvent = asyncHandler(async (req: TenantRequest, res: Response
       title: eventData.title,
       description: eventData.description || null,
       start_date: startDate,
-      end_date: eventData.end_date ? new Date(eventData.end_date) : null,
+      end_date: eventData.end_date ? new Date(eventData.end_date) : undefined,
       location: eventData.location || null,
       image_url: eventData.image_url || null,
       is_featured_banner: eventData.is_featured_banner || false

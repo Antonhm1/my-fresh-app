@@ -9,10 +9,10 @@ interface InfoQueryParams extends QueryParams {
 
 export const getInfo = asyncHandler(async (req: TenantRequest, res: Response<ApiResponse>) => {
   const tenant = req.tenant!;
-  const { featured, type, limit, offset } = req.query as InfoQueryParams;
+  const { featured, type, limit, offset } = req.query;
 
   // Convert query params to proper types
-  const featuredBoolean = featured === true || featured === 'true' ? true : featured === 'false' ? false : undefined;
+  const featuredBoolean = featured === 'true' ? true : featured === 'false' ? false : undefined;
   const limitNumber = limit ? parseInt(limit.toString()) : undefined;
   const offsetNumber = offset ? parseInt(offset.toString()) : undefined;
 

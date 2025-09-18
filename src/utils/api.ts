@@ -1,4 +1,4 @@
-import {
+import type {
   ApiResponse,
   Event,
   Info,
@@ -155,21 +155,19 @@ class ApiClient {
 // Create singleton instance
 export const apiClient = new ApiClient();
 
-// Export individual methods for convenience
-export const {
-  getEvents,
-  getEvent,
-  createEvent,
-  updateEvent,
-  deleteEvent,
-  getInfo,
-  getInfoById,
-  createInfo,
-  updateInfo,
-  deleteInfo,
-  getBanners,
-  getBanner,
-  healthCheck,
-} = apiClient;
+// Export individual methods for convenience (properly bound)
+export const getEvents = apiClient.getEvents.bind(apiClient);
+export const getEvent = apiClient.getEvent.bind(apiClient);
+export const createEvent = apiClient.createEvent.bind(apiClient);
+export const updateEvent = apiClient.updateEvent.bind(apiClient);
+export const deleteEvent = apiClient.deleteEvent.bind(apiClient);
+export const getInfo = apiClient.getInfo.bind(apiClient);
+export const getInfoById = apiClient.getInfoById.bind(apiClient);
+export const createInfo = apiClient.createInfo.bind(apiClient);
+export const updateInfo = apiClient.updateInfo.bind(apiClient);
+export const deleteInfo = apiClient.deleteInfo.bind(apiClient);
+export const getBanners = apiClient.getBanners.bind(apiClient);
+export const getBanner = apiClient.getBanner.bind(apiClient);
+export const healthCheck = apiClient.healthCheck.bind(apiClient);
 
 export { ApiError };

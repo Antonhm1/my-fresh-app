@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ApiError, getEvents, getInfo, getBanners } from '../utils/api';
+import type { EventsResponse, InfoResponse, BannersResponse } from '../types/api';
 
 export interface UseApiState<T> {
   data: T | null;
@@ -56,13 +57,14 @@ export function useEvents(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  return useApi(
-    () => getEvents({
+  const apiCall = useCallback(async () => {
+    return getEvents({
       featured: options?.featured,
       limit: options?.limit,
-    }),
-    { immediate: options?.immediate ?? true }
-  );
+    });
+  }, [options?.featured, options?.limit]);
+
+  return useApi(apiCall, { immediate: options?.immediate ?? true });
 }
 
 // Hook specifically for info/news
@@ -72,14 +74,15 @@ export function useInfo(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  return useApi(
-    () => getInfo({
+  const apiCall = useCallback(async () => {
+    return getInfo({
       featured: options?.featured,
       type: options?.type,
       limit: options?.limit,
-    }),
-    { immediate: options?.immediate ?? true }
-  );
+    });
+  }, [options?.featured, options?.type, options?.limit]);
+
+  return useApi(apiCall, { immediate: options?.immediate ?? true });
 }
 
 // Hook specifically for banners
@@ -87,10 +90,11 @@ export function useBanners(options?: {
   limit?: number;
   immediate?: boolean;
 }) {
-  return useApi(
-    () => getBanners({ limit: options?.limit }),
-    { immediate: options?.immediate ?? true }
-  );
+  const apiCall = useCallback(async () => {
+    return getBanners({ limit: options?.limit });
+  }, [options?.limit]);
+
+  return useApi(apiCall, { immediate: options?.immediate ?? true });
 }
 
 // Generic hook for async operations with loading states
