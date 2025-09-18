@@ -1,60 +1,56 @@
+import { useBanners } from '../../hooks/useApi';
 import Banner from '../Banner';
+import { BannersLoadingSkeleton } from '../LoadingSkeletons';
+import { API_LIMITS, FALLBACK_IMAGES, EMPTY_STATE_MESSAGES } from '../../constants/api';
 import './Banners.css';
 
-const bannersData = [
-  {
-    id: 1,
-    image: '/eventplaceholderimage1.png',
-    title: 'Søndagsgudstjeneste',
-    description: 'Deltag i vores ugentlige gudstjeneste hver søndag kl. 10:00 med tilbedelse, bøn og fællesskab.'
-  },
-  {
-    id: 2,
-    image: '/eventplaceholderimage2.png',
-    title: 'Bibelstudium',
-    description: 'Ugentlige bibelstudiegrupper hver onsdag aften. Udforsk Skriften sammen i små grupper.'
-  },
-  {
-    id: 3,
-    image: '/eventpladeholderimage3.png',
-    title: 'Ungdomsgruppe',
-    description: 'Aktiviteter og fællesskab for unge mellem 13-18 år. Spil, diskussioner og samfundstjeneste.'
-  },
-  {
-    id: 4,
-    image: '/eventplaceholderimage1.png',
-    title: 'Fællesbegivenheder',
-    description: 'Regelmæssige fællessammenkomster, velgørenhedsarrangementer og særlige fejringer året rundt.'
-  },
-  {
-    id: 5,
-    image: '/eventplaceholderimage2.png',
-    title: 'Bønnegruppe',
-    description: 'Deltag i vores bønnekreds hver fredag morgen for fælles bøn og åndelig støtte.'
-  },
-  {
-    id: 6,
-    image: '/eventpladeholderimage3.png',
-    title: 'Musikministerium',
-    description: 'Bliv en del af vores kor og musikministerium. Øvelser hver torsdag aften.'
-  }
-];
-
 const Banners = () => {
+  const { data: bannersData, loading, error, refetch } = useBanners({ limit: API_LIMITS.BANNERS });
+
+  if (loading) {
+    return <BannersLoadingSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <section className="banners-section">
+        <div className="banners-container">
+          <h2 className="banners-title">Vores Kirkeaktiviteter</h2>
+          <div className="error-state">
+            <p>Der opstod en fejl ved indlæsning af aktiviteter: {error}</p>
+            <button onClick={refetch} className="retry-button">
+              Prøv igen
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const banners = bannersData?.banners || [];
+
   return (
     <section className="banners-section">
       <div className="banners-container">
         <h2 className="banners-title">Vores Kirkeaktiviteter</h2>
         <div className="banners-grid">
-          {bannersData.map((banner) => (
+          {banners.map((banner) => (
             <Banner
-              key={banner.id}
-              image={banner.image}
+              key={`${banner.type}-${banner.id}`}
+              image={banner.image_url || FALLBACK_IMAGES.EVENT}
               title={banner.title}
-              description={banner.description}
+              description={banner.description || banner.content || 'Ingen beskrivelse tilgængelig'}
             />
           ))}
         </div>
+        {banners.length === 0 && (
+          <div className="empty-state">
+            <p>🎉 {EMPTY_STATE_MESSAGES.BANNERS}</p>
+            <button onClick={refetch} className="refresh-button">
+              Opdater
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
